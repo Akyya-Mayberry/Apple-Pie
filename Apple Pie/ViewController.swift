@@ -13,9 +13,15 @@ class ViewController: UIViewController {
     // MARK: - Properties
     
     @IBOutlet weak var TreeImageView: UIImageView!
-    @IBOutlet weak var correctWordLable: UILabel!
+    @IBOutlet weak var correctWordLabel: UILabel!
     @IBOutlet weak var scoreLabel: UILabel!
     @IBOutlet var letterButtons: [UIButton]!
+    
+    var listOfWords = ["pickle", "ice skating", "superman", "california"]
+    var totalWins = 0
+    var totalLosses = 0
+    let incorrectMovesAllowed = 7
+    var currentGame: Game!
     
     // MARK: - Methods
     
@@ -24,12 +30,17 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        
+        newRound()
     }
     
     @IBAction func buttonPressed(_ sender: UIButton) {
         sender.isEnabled = false
     }
     
+    func newRound() {
+        currentGame = Game(word: listOfWords.removeLast(), incorrectMovesRemaining: incorrectMovesAllowed)
+    }
     
 }
 

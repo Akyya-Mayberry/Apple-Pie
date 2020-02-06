@@ -250,7 +250,7 @@
                     </view>
                     <connections>
                         <outlet property="TreeImageView" destination="aTY-zA-cqv" id="b5H-jf-b9V"/>
-                        <outlet property="correctWordLable" destination="dKu-px-8Gz" id="zoc-QX-WdT"/>
+                        <outlet property="correctWordLabel" destination="dKu-px-8Gz" id="wer-nN-tYr"/>
                         <outlet property="scoreLabel" destination="Rdc-rX-k9w" id="3UR-gC-lOY"/>
                         <outletCollection property="letterButtons" destination="xJL-fC-3VP" collectionClass="NSMutableArray" id="bqb-Y9-bLQ"/>
                         <outletCollection property="letterButtons" destination="HOP-je-rfM" collectionClass="NSMutableArray" id="oU4-Xs-IKv"/>
