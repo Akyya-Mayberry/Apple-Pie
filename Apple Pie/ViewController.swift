@@ -49,9 +49,18 @@ class ViewController: UIViewController {
     }
     
     func updateUI() {
-        correctWordLabel.text = currentGame.formattedWord
+        correctWordLabel.text = currentGame.formatWord(currentGame.formattedWord, separatedBy: "_")
         scoreLabel.text = "Total Wins: \(totalWins), Total Losses: \(totalLosses)"
         treeImageView.image = UIImage(named: "Tree \(currentGame.incorrectMovesRemaining)")
+    }
+}
+
+// MARK: - Extensions
+
+extension Game {
+    func formatWord(_ word: String, separatedBy: String) -> String {
+        let formattedStringAsArray = Array.init(word).map{String($0)}
+        return formattedStringAsArray.joined(separator: " ")
     }
 }
 
