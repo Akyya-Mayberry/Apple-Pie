@@ -9,9 +9,19 @@
 import Foundation
 
 struct Game {
+    
     var word: String
     var incorrectMovesRemaining: Int
     var guessedLetters: [Character]
+    var formattedWord: String {
+        get {
+            var formattedString = ""
+            for letter in word {
+                formattedString.append(guessedLetters.contains(letter) ? letter : "_")
+            }
+            return formattedString
+        }
+    }
     
     mutating func guessLetter(_ letter: Character) {
         if !word.contains(letter) {

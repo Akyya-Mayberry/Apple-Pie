@@ -40,13 +40,16 @@ class ViewController: UIViewController {
         let letterString = sender.title(for: .normal)!
         let character = Character(letterString.lowercased())
         currentGame.guessLetter(character)
+        updateUI()
     }
     
     func newRound() {
         currentGame = Game(word: listOfWords.removeLast(), incorrectMovesRemaining: incorrectMovesAllowed, guessedLetters: [])
+        print("The word is: \(currentGame.word)")
     }
     
     func updateUI() {
+        correctWordLabel.text = currentGame.formattedWord
         scoreLabel.text = "Total Wins: \(totalWins), Total Losses: \(totalLosses)"
         treeImageView.image = UIImage(named: "Tree \(currentGame.incorrectMovesRemaining)")
     }
