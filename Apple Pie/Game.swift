@@ -8,13 +8,18 @@
 
 import Foundation
 
+protocol GameDelegate {
+    func didGuess(letter: Character, currentGame game: Game, incorrectMovesRemaining: Int)
+}
+
 struct Game {
     
     // MARK: - Properties
     
     private var _incorrectMovesRemaining: Int
     private var guessedLetters: [Character] = []
-    let word: String
+    var word: String
+    var delegate: GameDelegate?
     var incorrectMovesRemaining: Int {
         get {
             return _incorrectMovesRemaining
@@ -32,7 +37,7 @@ struct Game {
     
     init(word: String, incorrectMovesRemaining: Int) {
         self.word = word
-        _incorrectMovesRemaining = incorrectMovesRemaining
+        self._incorrectMovesRemaining = incorrectMovesRemaining
     }
     
     // MARK: - Methods
@@ -43,6 +48,8 @@ struct Game {
         }
         
         guessedLetters.append(letter)
+        
+        delegate?.didGuess(letter: letter, currentGame: self, incorrectMovesRemaining: _incorrectMovesRemaining)
         print("moves remaining: \(incorrectMovesRemaining), guessed letters: \(guessedLetters)")
     }
 }

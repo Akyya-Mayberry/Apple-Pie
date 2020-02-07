@@ -43,6 +43,8 @@ class ViewController: UIViewController {
     
     private func newRound() {
         currentGame = Game(word: listOfWords.removeLast(), incorrectMovesRemaining: incorrectMovesAllowed)
+        currentGame.delegate = self
+        updateUI()
         print("The word is: \(currentGame.word)")
     }
     
@@ -50,10 +52,26 @@ class ViewController: UIViewController {
         correctWordLabel.text = currentGame.formatWord(currentGame.formattedWord, separatedBy: "_")
         scoreLabel.text = "Total Wins: \(totalWins), Total Losses: \(totalLosses)"
         treeImageView.image = UIImage(named: "Tree \(currentGame.incorrectMovesRemaining)")
+        
+        for button in letterButtons {
+            button.isEnabled = true
+        }
     }
+    
 }
 
 // MARK: - Extensions
+
+extension ViewController: GameDelegate {
+    func didGuess(letter: Character, currentGame game: Game, incorrectMovesRemaining: Int) {
+        if incorrectMovesRemaining < 1 {
+            DispatchQueue.main.async {
+                self.totalLosses += 1
+                self.newRound()
+            }
+        }
+    }
+}
 
 extension Game {
     func formatWord(_ word: String, separatedBy: String) -> String {
@@ -61,4 +79,3 @@ extension Game {
         return formattedStringAsArray.joined(separator: " ")
     }
 }
-
