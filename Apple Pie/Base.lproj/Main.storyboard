@@ -249,9 +249,9 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
-                        <outlet property="TreeImageView" destination="aTY-zA-cqv" id="b5H-jf-b9V"/>
                         <outlet property="correctWordLabel" destination="dKu-px-8Gz" id="wer-nN-tYr"/>
                         <outlet property="scoreLabel" destination="Rdc-rX-k9w" id="3UR-gC-lOY"/>
+                        <outlet property="treeImageView" destination="aTY-zA-cqv" id="EHe-RW-L0b"/>
                         <outletCollection property="letterButtons" destination="xJL-fC-3VP" collectionClass="NSMutableArray" id="bqb-Y9-bLQ"/>
                         <outletCollection property="letterButtons" destination="HOP-je-rfM" collectionClass="NSMutableArray" id="oU4-Xs-IKv"/>
                         <outletCollection property="letterButtons" destination="fCj-ab-F1k" collectionClass="NSMutableArray" id="KQm-PI-Ue7"/>

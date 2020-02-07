@@ -12,7 +12,7 @@ class ViewController: UIViewController {
     
     // MARK: - Properties
     
-    @IBOutlet weak var TreeImageView: UIImageView!
+    @IBOutlet weak var treeImageView: UIImageView!
     @IBOutlet weak var correctWordLabel: UILabel!
     @IBOutlet weak var scoreLabel: UILabel!
     @IBOutlet var letterButtons: [UIButton]!
@@ -32,15 +32,23 @@ class ViewController: UIViewController {
         // Do any additional setup after loading the view.
         
         newRound()
+        updateUI()
     }
     
     @IBAction func buttonPressed(_ sender: UIButton) {
         sender.isEnabled = false
+        let letterString = sender.title(for: .normal)!
+        let character = Character(letterString.lowercased())
+        currentGame.guessLetter(character)
     }
     
     func newRound() {
-        currentGame = Game(word: listOfWords.removeLast(), incorrectMovesRemaining: incorrectMovesAllowed)
+        currentGame = Game(word: listOfWords.removeLast(), incorrectMovesRemaining: incorrectMovesAllowed, guessedLetters: [])
     }
     
+    func updateUI() {
+        scoreLabel.text = "Total Wins: \(totalWins), Total Losses: \(totalLosses)"
+        treeImageView.image = UIImage(named: "Tree \(currentGame.incorrectMovesRemaining)")
+    }
 }
 
