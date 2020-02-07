@@ -19,8 +19,16 @@ class ViewController: UIViewController {
     
     private let incorrectMovesAllowed = 7
     private var listOfWords = ["pickle", "ice skating", "superman", "california"]
-    private var totalWins = 0
-    private var totalLosses = 0
+    private var totalWins = 0 {
+        didSet {
+            newRound()
+        }
+    }
+    private var totalLosses = 0 {
+        didSet {
+            newRound()
+        }
+    }
     private var currentGame: Game!
     
     // MARK: - Methods
@@ -38,23 +46,31 @@ class ViewController: UIViewController {
         let letterString = sender.title(for: .normal)!
         let character = Character(letterString.lowercased())
         currentGame.guessLetter(character)
-        updateUI()
     }
     
     private func newRound() {
-        currentGame = Game(word: listOfWords.removeLast(), incorrectMovesRemaining: incorrectMovesAllowed)
-        currentGame.delegate = self
-        updateUI()
-        print("The word is: \(currentGame.word)")
+        if !listOfWords.isEmpty {
+            currentGame = Game(word: listOfWords.removeLast(), incorrectMovesRemaining: incorrectMovesAllowed)
+            currentGame.delegate = self
+            
+            enableLetterButtons(true)
+            
+            print("The word is: \(currentGame.word)")
+            updateUI()
+        } else {
+            enableLetterButtons(false)
+        }
     }
     
     private func updateUI() {
         correctWordLabel.text = currentGame.formatWord(currentGame.formattedWord, separatedBy: "_")
         scoreLabel.text = "Total Wins: \(totalWins), Total Losses: \(totalLosses)"
         treeImageView.image = UIImage(named: "Tree \(currentGame.incorrectMovesRemaining)")
-        
+    }
+    
+    private func enableLetterButtons(_ enable: Bool) {
         for button in letterButtons {
-            button.isEnabled = true
+            button.isEnabled = enable
         }
     }
     
@@ -64,10 +80,16 @@ class ViewController: UIViewController {
 
 extension ViewController: GameDelegate {
     func didGuess(letter: Character, currentGame game: Game, incorrectMovesRemaining: Int) {
-        if incorrectMovesRemaining < 1 {
-            DispatchQueue.main.async {
+        DispatchQueue.main.async {
+            
+            let isWinner = self.currentGame.word == self.currentGame.formattedWord
+            
+            if incorrectMovesRemaining < 1 {
                 self.totalLosses += 1
-                self.newRound()
+            } else if isWinner {
+                self.totalWins += 1
+            } else {
+                self.updateUI()
             }
         }
     }
