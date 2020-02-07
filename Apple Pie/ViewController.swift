@@ -17,15 +17,13 @@ class ViewController: UIViewController {
     @IBOutlet weak var scoreLabel: UILabel!
     @IBOutlet var letterButtons: [UIButton]!
     
-    var listOfWords = ["pickle", "ice skating", "superman", "california"]
-    var totalWins = 0
-    var totalLosses = 0
-    let incorrectMovesAllowed = 7
-    var currentGame: Game!
+    private let incorrectMovesAllowed = 7
+    private var listOfWords = ["pickle", "ice skating", "superman", "california"]
+    private var totalWins = 0
+    private var totalLosses = 0
+    private var currentGame: Game!
     
     // MARK: - Methods
-    
-    // MARK: - Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,12 +41,12 @@ class ViewController: UIViewController {
         updateUI()
     }
     
-    func newRound() {
-        currentGame = Game(word: listOfWords.removeLast(), incorrectMovesRemaining: incorrectMovesAllowed, guessedLetters: [])
+    private func newRound() {
+        currentGame = Game(word: listOfWords.removeLast(), incorrectMovesRemaining: incorrectMovesAllowed)
         print("The word is: \(currentGame.word)")
     }
     
-    func updateUI() {
+    private func updateUI() {
         correctWordLabel.text = currentGame.formatWord(currentGame.formattedWord, separatedBy: "_")
         scoreLabel.text = "Total Wins: \(totalWins), Total Losses: \(totalLosses)"
         treeImageView.image = UIImage(named: "Tree \(currentGame.incorrectMovesRemaining)")

@@ -10,9 +10,16 @@ import Foundation
 
 struct Game {
     
-    var word: String
-    var incorrectMovesRemaining: Int
-    var guessedLetters: [Character]
+    // MARK: - Properties
+    
+    private var _incorrectMovesRemaining: Int
+    private var guessedLetters: [Character] = []
+    let word: String
+    var incorrectMovesRemaining: Int {
+        get {
+            return _incorrectMovesRemaining
+        }
+    }
     var formattedWord: String {
         get {
             var formattedString = ""
@@ -23,9 +30,16 @@ struct Game {
         }
     }
     
+    init(word: String, incorrectMovesRemaining: Int) {
+        self.word = word
+        _incorrectMovesRemaining = incorrectMovesRemaining
+    }
+    
+    // MARK: - Methods
+    
     mutating func guessLetter(_ letter: Character) {
         if !word.contains(letter) {
-            incorrectMovesRemaining -= 1
+            _incorrectMovesRemaining -= 1
         }
         
         guessedLetters.append(letter)
