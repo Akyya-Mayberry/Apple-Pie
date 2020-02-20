@@ -52,4 +52,15 @@ struct Game {
         delegate?.didGuess(letter: letter, currentGame: self, incorrectMovesRemaining: _incorrectMovesRemaining)
         print("moves remaining: \(incorrectMovesRemaining), guessed letters: \(guessedLetters)")
     }
+  
+  func getFormattedWord() -> String {
+    return formatWord(formattedWord, separatedBy: "_")
+  }
+}
+
+extension Game {
+    func formatWord(_ word: String, separatedBy: String) -> String {
+        let formattedStringAsArray = Array.init(word).map{String($0)}
+        return formattedStringAsArray.joined(separator: " ")
+    }
 }
