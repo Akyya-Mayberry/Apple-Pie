@@ -54,8 +54,6 @@ class ViewController: UIViewController {
       currentGame.delegate = self
       
       enableLetterButtons(true)
-      
-      print("The word is: \(currentGame.word)")
       updateUI()
     } else {
       enableLetterButtons(false)
@@ -65,7 +63,7 @@ class ViewController: UIViewController {
   private func updateUI() {
     correctWordLabel.text = currentGame.getFormattedWord()
     scoreLabel.text = "Total Wins: \(totalWins), Total Losses: \(totalLosses)"
-    treeImageView.image = UIImage(named: "Tree \(currentGame.incorrectMovesRemaining)")
+    treeImageView.image = currentGame.treeImage
   }
   
   private func enableLetterButtons(_ enable: Bool) {
