@@ -10,28 +10,21 @@ import Foundation
 import UIKit
 
 protocol GameDelegate {
-  func didGuess(letter: Character, currentGame game: Game, incorrectMovesRemaining: Int)
+  func didGuess(letter: Character, currentGame game: GameViewModel, incorrectMovesRemaining: Int)
 }
 
-struct Game {
+struct GameViewModel {
   
   // MARK: - Properties
   
-  private var _incorrectMovesRemaining: Int
+  private var game: GameModel
   private var guessedLetters: [Character] = []
-  var word: String
   var delegate: GameDelegate?
-  
-  var incorrectMovesRemaining: Int {
-    get {
-      return _incorrectMovesRemaining
-    }
-  }
   
   var formattedWord: String {
     get {
       var formattedString = ""
-      for letter in word {
+      for letter in game.word {
         formattedString.append(guessedLetters.contains(letter) ? letter : "_")
       }
       return formattedString
@@ -40,34 +33,36 @@ struct Game {
   
   var treeImage: UIImage {
     get {
-      UIImage(named: "Tree \(_incorrectMovesRemaining)")!
+      UIImage(named: "Tree \(game.incorrectMovesRemaining)")!
     }
   }
   
   init(word: String, incorrectMovesRemaining: Int) {
-    self.word = word
-    self._incorrectMovesRemaining = incorrectMovesRemaining
+    self.game = GameModel(word: word, incorrectMovesRemaining: incorrectMovesRemaining)
   }
   
   // MARK: - Methods
   
   mutating func guessLetter(_ letter: Character) {
-    if !word.contains(letter) {
-      _incorrectMovesRemaining -= 1
+    if !game.word.contains(letter) {
+      game.incorrectMovesRemaining -= 1
     }
     
     guessedLetters.append(letter)
     
-    delegate?.didGuess(letter: letter, currentGame: self, incorrectMovesRemaining: _incorrectMovesRemaining)
-    print("moves remaining: \(incorrectMovesRemaining), guessed letters: \(guessedLetters)")
+    delegate?.didGuess(letter: letter, currentGame: self, incorrectMovesRemaining: game.incorrectMovesRemaining)
   }
   
   func getFormattedWord() -> String {
     return formatWord(formattedWord, separatedBy: "_")
   }
+  
+  func getWord() -> String {
+    return game.word
+  }
 }
 
-extension Game {
+extension GameViewModel {
   func formatWord(_ word: String, separatedBy: String) -> String {
     let formattedStringAsArray = Array.init(word).map{String($0)}
     return formattedStringAsArray.joined(separator: " ")

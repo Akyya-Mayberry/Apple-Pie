@@ -29,7 +29,7 @@ class ViewController: UIViewController {
       newRound()
     }
   }
-  private var currentGame: Game!
+  private var currentGame: GameViewModel!
   
   // MARK: - Methods
   
@@ -50,10 +50,11 @@ class ViewController: UIViewController {
   
   private func newRound() {
     if !listOfWords.isEmpty {
-      currentGame = Game(word: listOfWords.removeLast(), incorrectMovesRemaining: incorrectMovesAllowed)
+      currentGame = GameViewModel(word: listOfWords.removeLast(), incorrectMovesRemaining: incorrectMovesAllowed)
       currentGame.delegate = self
       
       enableLetterButtons(true)
+      
       updateUI()
     } else {
       enableLetterButtons(false)
@@ -77,10 +78,10 @@ class ViewController: UIViewController {
 // MARK: - Extensions
 
 extension ViewController: GameDelegate {
-  func didGuess(letter: Character, currentGame game: Game, incorrectMovesRemaining: Int) {
+  func didGuess(letter: Character, currentGame game: GameViewModel, incorrectMovesRemaining: Int) {
     DispatchQueue.main.async {
       
-      let isWinner = self.currentGame.word == self.currentGame.formattedWord
+      let isWinner = self.currentGame.getWord() == self.currentGame.formattedWord
       
       if incorrectMovesRemaining < 1 {
         self.totalLosses += 1
