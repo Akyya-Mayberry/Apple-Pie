@@ -17,8 +17,9 @@ struct GameViewModel {
   
   // MARK: - Properties
   
-  private var game: GameModel
+  private let game: GameModel
   private var guessedLetters: [Character] = []
+  private var incorrectMovesRemaining: Int
   var delegate: GameDelegate?
   
   var formattedWord: String {
@@ -33,24 +34,25 @@ struct GameViewModel {
   
   var treeImage: UIImage {
     get {
-      UIImage(named: "Tree \(game.incorrectMovesRemaining)")!
+      UIImage(named: "Tree \(incorrectMovesRemaining)")!
     }
   }
   
-  init(word: String, incorrectMovesRemaining: Int) {
-    self.game = GameModel(word: word, incorrectMovesRemaining: incorrectMovesRemaining)
+  init(word: String, incorrectMovesAllowed: Int) {
+    self.incorrectMovesRemaining = incorrectMovesAllowed
+    self.game = GameModel(word: word, incorrectMovesAllowed: incorrectMovesRemaining)
   }
   
   // MARK: - Methods
   
   mutating func guessLetter(_ letter: Character) {
     if !game.word.contains(letter) {
-      game.incorrectMovesRemaining -= 1
+      incorrectMovesRemaining -= 1
     }
     
     guessedLetters.append(letter)
     
-    delegate?.didGuess(letter: letter, currentGame: self, incorrectMovesRemaining: game.incorrectMovesRemaining)
+    delegate?.didGuess(letter: letter, currentGame: self, incorrectMovesRemaining: incorrectMovesRemaining)
   }
   
   func getFormattedWord() -> String {

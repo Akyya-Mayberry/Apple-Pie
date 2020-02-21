@@ -8,5 +8,5 @@
 
 struct GameModel {
   let word: String
-  var incorrectMovesRemaining: Int
+  var incorrectMovesAllowed: Int
 }

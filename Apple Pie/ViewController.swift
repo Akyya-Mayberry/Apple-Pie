@@ -50,7 +50,7 @@ class ViewController: UIViewController {
   
   private func newRound() {
     if !listOfWords.isEmpty {
-      currentGame = GameViewModel(word: listOfWords.removeLast(), incorrectMovesRemaining: incorrectMovesAllowed)
+      currentGame = GameViewModel(word: listOfWords.removeLast(), incorrectMovesAllowed: incorrectMovesAllowed)
       currentGame.delegate = self
       
       enableLetterButtons(true)
