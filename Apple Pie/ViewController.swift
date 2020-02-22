@@ -17,7 +17,7 @@ class ViewController: UIViewController {
   @IBOutlet weak var scoreLabel: UILabel!
   @IBOutlet var letterButtons: [UIButton]!
   
-  private let incorrectMovesAllowed = 7
+  private let incorrectGuessesAllowed = 7
   private var listOfWords = ["pickle", "ice skating", "superman", "california"]
   private var totalWins = 0 {
     didSet {
@@ -50,7 +50,7 @@ class ViewController: UIViewController {
   
   private func newRound() {
     if !listOfWords.isEmpty {
-      currentGame = GameViewModel(word: listOfWords.removeLast(), incorrectMovesAllowed: incorrectMovesAllowed)
+      currentGame = GameViewModel(word: listOfWords.removeLast(), incorrectGuessesAllowed: incorrectGuessesAllowed)
       currentGame.delegate = self
       
       enableLetterButtons(true)

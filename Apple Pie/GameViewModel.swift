@@ -9,15 +9,24 @@
 import Foundation
 import UIKit
 
+// TODO: Update delegates to be required to determine termination of game
+
 protocol GameDelegate {
   func didGuess(letter: Character, currentGame game: GameViewModel, incorrectMovesRemaining: Int)
 }
 
+/**
+ Creates an instance that manages a Game by keeping track of which letters have been guessed and how many guesses remain
+ 
+ - Parameters
+ - parameter1 word: the word to guess
+ - parameter2 incorrectGuessesAllowed: number of chances to guess the word
+ */
 struct GameViewModel {
   
   // MARK: - Properties
   
-  private let game: GameModel
+  private let game: Game
   private var guessedLetters: [Character] = []
   private var incorrectMovesRemaining: Int
   var delegate: GameDelegate?
@@ -38,13 +47,18 @@ struct GameViewModel {
     }
   }
   
-  init(word: String, incorrectMovesAllowed: Int) {
-    self.incorrectMovesRemaining = incorrectMovesAllowed
-    self.game = GameModel(word: word, incorrectMovesAllowed: incorrectMovesRemaining)
+  init(word: String, incorrectGuessesAllowed: Int) {
+    self.incorrectMovesRemaining = incorrectGuessesAllowed
+    self.game = Game(word: word, incorrectGuessesAllowed: incorrectGuessesAllowed)
   }
   
   // MARK: - Methods
   
+  /**
+   Makes a guess by checking if a letter is in the game's word
+   
+   - Parameter letter:  the character to check
+   */
   mutating func guessLetter(_ letter: Character) {
     if !game.word.contains(letter) {
       incorrectMovesRemaining -= 1
@@ -52,21 +66,23 @@ struct GameViewModel {
     
     guessedLetters.append(letter)
     
+    // TODO:
+    // Consider moving this to guessed letters didSet
     delegate?.didGuess(letter: letter, currentGame: self, incorrectMovesRemaining: incorrectMovesRemaining)
   }
   
+  /**
+   Returns the game's formatted word with each character seperated by whitespace
+   */
   func getFormattedWord() -> String {
-    return formatWord(formattedWord, separatedBy: "_")
+    let formattedStringAsArray = Array.init(formattedWord).map{String($0)}
+    return formattedStringAsArray.joined(separator: " ")
   }
   
+  /**
+   Returns the game's word as characters only without formatting
+   */
   func getWord() -> String {
     return game.word
-  }
-}
-
-extension GameViewModel {
-  func formatWord(_ word: String, separatedBy: String) -> String {
-    let formattedStringAsArray = Array.init(word).map{String($0)}
-    return formattedStringAsArray.joined(separator: " ")
   }
 }

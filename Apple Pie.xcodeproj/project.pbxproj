@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		AB08E0CC23FFA63100E57F68 /* GameModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB08E0CB23FFA63100E57F68 /* GameModel.swift */; };
+		AB08E0CC23FFA63100E57F68 /* Game.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB08E0CB23FFA63100E57F68 /* Game.swift */; };
 		D36E772C23EC4D240009ED58 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D36E772B23EC4D240009ED58 /* AppDelegate.swift */; };
 		D36E772E23EC4D240009ED58 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D36E772D23EC4D240009ED58 /* SceneDelegate.swift */; };
 		D36E773023EC4D240009ED58 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D36E772F23EC4D240009ED58 /* ViewController.swift */; };
@@ -18,7 +18,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		AB08E0CB23FFA63100E57F68 /* GameModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameModel.swift; sourceTree = "<group>"; };
+		AB08E0CB23FFA63100E57F68 /* Game.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Game.swift; sourceTree = "<group>"; };
 		D36E772823EC4D230009ED58 /* Apple Pie.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Apple Pie.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D36E772B23EC4D240009ED58 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D36E772D23EC4D240009ED58 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -60,7 +60,7 @@
 		D36E772A23EC4D230009ED58 /* Apple Pie */ = {
 			isa = PBXGroup;
 			children = (
-				AB08E0CB23FFA63100E57F68 /* GameModel.swift */,
+				AB08E0CB23FFA63100E57F68 /* Game.swift */,
 				D36E772B23EC4D240009ED58 /* AppDelegate.swift */,
 				D36E772D23EC4D240009ED58 /* SceneDelegate.swift */,
 				D36E772F23EC4D240009ED58 /* ViewController.swift */,
@@ -144,7 +144,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AB08E0CC23FFA63100E57F68 /* GameModel.swift in Sources */,
+				AB08E0CC23FFA63100E57F68 /* Game.swift in Sources */,
 				D36E773023EC4D240009ED58 /* ViewController.swift in Sources */,
 				D36E772C23EC4D240009ED58 /* AppDelegate.swift in Sources */,
 				D36E772E23EC4D240009ED58 /* SceneDelegate.swift in Sources */,
